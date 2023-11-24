@@ -20,3 +20,22 @@ export const addTodoData: (props: AddTodoDataProps) => void = (
   setTodos([...todos, newTodo])
   setInputValue("")
 }
+
+type ChangeTodoStatusProps = {
+  todo: todoType;
+  todos: todoType[];
+  setTodos: (todos: todoType[]) => void;
+  value: todoType["status"];
+};
+
+export const changeTodoStatus: (props: ChangeTodoStatusProps) => void = (
+  { todo, todos, setTodos, value }
+) => {
+  const newTodos = todos.map((item) => {
+    if (item.id === todo.id) {
+      item.status = value
+    }
+    return item
+  })
+  setTodos(newTodos)
+}

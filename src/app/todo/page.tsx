@@ -5,7 +5,7 @@ import { todoType } from "@/app/todo/types";
 import { useState } from 'react';
 
 import { Button } from "@/app/todo/components/Button/index";
-import { addTodoData } from "@/app/todo/components/Button/action";
+import { addTodoData, changeTodoStatus } from "@/app/todo/components/Button/action";
 
 export default function Todo() {
   const initData: todoType[] = [
@@ -41,7 +41,9 @@ export default function Todo() {
             return (
               <li key={todo.id}>
                 {todo.title}
-                <button>In Progress</button>
+                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
+                  In Progress
+                </Button>
               </li>
             )
           })}
@@ -56,8 +58,12 @@ export default function Todo() {
             return (
               <li key={todo.id}>
                 {todo.title}
-                <button>Not Started</button>
-                <button>Completed</button>
+                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'notStarted' })}>
+                  Not Started
+                </Button>
+                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'completed' })}>
+                  Completed
+                </Button>
               </li>
             )
           })}
@@ -72,7 +78,9 @@ export default function Todo() {
             return (
               <li key={todo.id}>
                 {todo.title}
-                <button>In Progress</button>
+                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
+                  In Progress
+                </Button>
               </li>
             )
           })}
