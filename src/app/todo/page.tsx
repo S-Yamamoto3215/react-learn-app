@@ -14,13 +14,30 @@ export default function Todo() {
 
   const [todos, setTodos] = useState(initData)
 
+  const [inputValue, setInputValue] = useState("")
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
+  }
+
+  const handleClick = () => {
+    if (!inputValue) return
+    const newTodo = {
+      // todo:idはライブラリで生成する
+      id: todos.length + 1,
+      title: inputValue,
+      status: 'notStarted',
+    }
+    setTodos([...todos, newTodo])
+    setInputValue("")
+  }
+
   return (
     <main>
       <h1>Simple ToDo App</h1>
       {/* input Area */}
       <div>
-        <input type="text" />
-        <button>Add</button>
+        <input type="text" value={inputValue} onChange={handleChange}/>
+        <button onClick={handleClick}>Add</button>
       </div>
 
       {/* Not Started Area */}
