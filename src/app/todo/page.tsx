@@ -1,34 +1,27 @@
 "use client";
 
+import { todoType } from "@/app/todo/types";
+
 import { useState } from 'react';
 
+import { Button } from "@/app/todo/components/Button/index";
+import { addTodoData } from "@/app/todo/components/Button/action";
+
 export default function Todo() {
-  const initData = [
-    { id: 1, title: 'Todo1', status: 'notStarted' },
-    { id: 2, title: 'Todo2', status: 'notStarted' },
-    { id: 3, title: 'Todo3', status: 'inProgress' },
-    { id: 4, title: 'Todo4', status: 'inProgress' },
-    { id: 5, title: 'Todo5', status: 'completed' },
-    { id: 6, title: 'Todo6', status: 'completed' },
+  const initData: todoType[] = [
+    { id: '1', title: 'Todo1', status: 'notStarted' },
+    { id: '2', title: 'Todo2', status: 'notStarted' },
+    { id: '3', title: 'Todo3', status: 'inProgress' },
+    { id: '4', title: 'Todo4', status: 'inProgress' },
+    { id: '5', title: 'Todo5', status: 'completed' },
+    { id: '6', title: 'Todo6', status: 'completed' },
   ];
 
-  const [todos, setTodos] = useState(initData)
+  const [todos, setTodos] = useState<todoType[]>(initData)
 
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState<string>("")
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
-  }
-
-  const handleClick = () => {
-    if (!inputValue) return
-    const newTodo = {
-      // todo:idはライブラリで生成する
-      id: todos.length + 1,
-      title: inputValue,
-      status: 'notStarted',
-    }
-    setTodos([...todos, newTodo])
-    setInputValue("")
   }
 
   return (
@@ -36,8 +29,8 @@ export default function Todo() {
       <h1>Simple ToDo App</h1>
       {/* input Area */}
       <div>
-        <input type="text" value={inputValue} onChange={handleChange}/>
-        <button onClick={handleClick}>Add</button>
+        <input type="text" value={inputValue} onChange={handleChange} />
+        <Button handleClick={() => addTodoData({inputValue, setInputValue, todos, setTodos})}>Add</Button>
       </div>
 
       {/* Not Started Area */}
