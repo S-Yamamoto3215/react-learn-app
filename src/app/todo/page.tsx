@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import { Button } from "@/app/todo/components/Button/index";
 import { addTodoData, changeTodoStatus } from "@/app/todo/components/Button/action";
+import { TodoList } from "@/app/todo/components/TodoList";
 
 export default function Todo() {
   const initData: todoType[] = [
@@ -36,55 +37,19 @@ export default function Todo() {
       {/* Not Started Area */}
       <div>
         <h2>Not Started</h2>
-        <ul>
-          {todos.filter((todo) => todo.status === 'notStarted').map((todo) => {
-            return (
-              <li key={todo.id}>
-                {todo.title}
-                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
-                  In Progress
-                </Button>
-              </li>
-            )
-          })}
-        </ul>
+        <TodoList todos={todos} setTodos={setTodos} filterValue={'notStarted'} />
       </div>
 
       {/* In Progress Area */}
       <div>
         <h2>In Progress</h2>
-        <ul>
-          {todos.filter((todo) => todo.status === 'inProgress').map((todo) => {
-            return (
-              <li key={todo.id}>
-                {todo.title}
-                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'notStarted' })}>
-                  Not Started
-                </Button>
-                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'completed' })}>
-                  Completed
-                </Button>
-              </li>
-            )
-          })}
-        </ul>
+        <TodoList todos={todos} setTodos={setTodos} filterValue={'inProgress'} />
       </div>
 
       {/* Completed Area */}
       <div>
         <h2>Completed</h2>
-        <ul>
-          {todos.filter((todo) => todo.status === 'completed').map((todo) => {
-            return (
-              <li key={todo.id}>
-                {todo.title}
-                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
-                  In Progress
-                </Button>
-              </li>
-            )
-          })}
-        </ul>
+        <TodoList todos={todos} setTodos={setTodos} filterValue={'completed'} />
       </div>
     </main>
   )
