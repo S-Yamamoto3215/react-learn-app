@@ -9,14 +9,7 @@ import { addTodoData, changeTodoStatus } from "@/app/todo/components/Button/acti
 import { TodoList } from "@/app/todo/components/TodoList";
 
 export default function Todo() {
-  const initData: todoType[] = [
-    { id: '1', title: 'Todo1', status: 'notStarted' },
-    { id: '2', title: 'Todo2', status: 'notStarted' },
-    { id: '3', title: 'Todo3', status: 'inProgress' },
-    { id: '4', title: 'Todo4', status: 'inProgress' },
-    { id: '5', title: 'Todo5', status: 'completed' },
-    { id: '6', title: 'Todo6', status: 'completed' },
-  ];
+  const initData: todoType[] = [];
 
   const [todos, setTodos] = useState<todoType[]>(initData)
 
