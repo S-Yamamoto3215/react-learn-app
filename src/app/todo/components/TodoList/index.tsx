@@ -1,6 +1,12 @@
 import { todoType } from "@/app/todo/types";
 
-import { Button } from '@/app/todo/components/Button';
+import {
+  Text,
+  ListItem,
+  UnorderedList,
+} from '@chakra-ui/react'
+
+import { MyButton } from "@/app/todo/components/Button/index";
 import { changeTodoStatus } from '@/app/todo/components/Button/action';
 
 type TodoListProps = {
@@ -12,29 +18,29 @@ type TodoListProps = {
 export const TodoList = (props: TodoListProps) => {
   const { todos, setTodos, filterValue } = props;
   return (
-    <ul>
+    <UnorderedList>
       {todos.filter((todo) => todo.status === filterValue).map((todo) => {
         return (
-          <li key={todo.id}>
-            {todo.title}
+          <ListItem key={todo.id}>
+            <Text fontSize='xl'>{todo.title}</Text>
             {(filterValue === 'notStarted' || filterValue === 'completed') &&
-              <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
+              <MyButton handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
                 In Progress
-              </Button>
+              </MyButton>
             }
             {filterValue === 'inProgress' &&
               <>
-                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'notStarted' })}>
+                <MyButton handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'notStarted' })}>
                   Not Started
-                </Button>
-                <Button handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'completed' })}>
+                </MyButton>
+                <MyButton handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'completed' })}>
                   Completed
-                </Button>
+                </MyButton>
               </>
             }
-          </li>
+          </ListItem>
         )
       })}
-    </ul>
+    </UnorderedList>
   );
 }

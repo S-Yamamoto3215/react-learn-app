@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { Providers } from "@/app/providers";
+
 export const metadata: Metadata = {
   title: 'Simple ToDo App',
   description: 'Learn React / Next.js Todo App',
@@ -12,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="jp">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }
