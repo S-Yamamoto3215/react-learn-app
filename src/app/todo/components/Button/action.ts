@@ -13,7 +13,7 @@ export const addTodoData: (props: AddTodoDataProps) => void = (
   if (!inputValue) return
   const newTodo: todoType = {
     // todo:idはライブラリで生成する
-    id: (todos.length + 1).toString(),
+    id: crypto.randomUUID(),
     title: inputValue,
     status: 'notStarted',
   }

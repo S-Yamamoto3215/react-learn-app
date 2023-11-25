@@ -5,7 +5,7 @@ import { todoType } from "@/app/todo/types";
 import { useState } from 'react';
 
 import { Button } from "@/app/todo/components/Button/index";
-import { addTodoData, changeTodoStatus } from "@/app/todo/components/Button/action";
+import { addTodoData } from "@/app/todo/components/Button/action";
 import { TodoList } from "@/app/todo/components/TodoList";
 
 export default function Todo() {
