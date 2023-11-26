@@ -1,9 +1,15 @@
 import { Button, IconButton } from '@chakra-ui/react'
+import { type } from 'os';
 
-export const MyButton = (props: { children: any; handleClick: any; }) => {
-  const { children, handleClick } = props;
+type myButtonProps = {
+  size: "lg" | "md" | "sm" | "xs",
+  children: any,
+  handleClick: any,
+}
+export const MyButton = (props: myButtonProps) => {
+  const { size="md", children, handleClick } = props;
   return (
-    <Button onClick={handleClick}>{children}</Button>
+    <Button colorScheme="green" size={size} onClick={handleClick}>{children}</Button>
   )
 }
 
@@ -11,6 +17,7 @@ export const MyIconButton = (props: { handleClick: any; icon: any, label: any })
   const { handleClick, icon, label } = props;
   return (
     <IconButton
+      colorScheme="green"
       aria-label={label}
       icon={icon}
       onClick={handleClick}

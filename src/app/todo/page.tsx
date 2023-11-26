@@ -6,10 +6,12 @@ import { useState } from 'react';
 
 import { AddIcon } from '@chakra-ui/icons'
 import {
+  Box,
+  Center,
+  Container,
   Heading,
-  Input,
-  InputGroup,
-  InputRightElement,
+  Input, InputGroup, InputRightElement,
+  Tabs, TabList, TabPanels, Tab, TabPanel
 } from '@chakra-ui/react'
 
 import { MyIconButton } from "@/app/todo/components/Button/index";
@@ -28,49 +30,55 @@ export default function Todo() {
 
   return (
     <main>
-      <Heading as='h1' size='2xl'>
-        Simple ToDo App
-      </Heading>
+      <Center h='50px'>
+        <Heading as='h1' size='2xl'>
+          Simple ToDo App
+        </Heading>
+      </Center>
       {/* input Area */}
-      <InputGroup size='md'>
-        <Input
-          type="text"
-          value={inputValue}
-          onChange={handleChange}
-          placeholder='e.x) buy milk'
-        />
-        <InputRightElement>
-          <MyIconButton
-            handleClick={() => addTodoData({ inputValue, setInputValue, todos, setTodos })}
-            icon={<AddIcon />}
-            label="Add Todo"
+      <Container mt={8} mb={8}>
+        <InputGroup size='md'>
+          <Input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            placeholder='e.x) buy milk'
           />
-        </InputRightElement>
-      </InputGroup>
+          <InputRightElement>
+            <MyIconButton
+              handleClick={() => addTodoData({ inputValue, setInputValue, todos, setTodos })}
+              icon={<AddIcon />}
+              label="Add Todo"
+            />
+          </InputRightElement>
+        </InputGroup>
+      </Container>
+      <Box mx={8}>
+        <Tabs variant='unstyled'>
+          <TabList>
+            <Tab _selected={{ color: 'white', bg: 'red.500' }}>Not Started</Tab>
+            <Tab _selected={{ color: 'white', bg: 'green.500' }}>In Progress</Tab>
+            <Tab _selected={{ color: 'white', bg: 'blue.500' }}>Completed</Tab>
+          </TabList>
 
-      {/* Not Started Area */}
-      <div>
-        <Heading as='h2' size='xl'>
-          Not Started
-        </Heading>
-        <TodoList todos={todos} setTodos={setTodos} filterValue={'notStarted'} />
-      </div>
+          <TabPanels>
+            {/* Not Started */}
+            <TabPanel>
+              <TodoList todos={todos} setTodos={setTodos} filterValue={'notStarted'} />
+            </TabPanel>
 
-      {/* In Progress Area */}
-      <div>
-        <Heading as='h2' size='xl'>
-          In Progress
-        </Heading>
-        <TodoList todos={todos} setTodos={setTodos} filterValue={'inProgress'} />
-      </div>
+            {/* In Progress */}
+            <TabPanel>
+              <TodoList todos={todos} setTodos={setTodos} filterValue={'inProgress'} />
+            </TabPanel>
 
-      {/* Completed Area */}
-      <div>
-        <Heading as='h2' size='xl'>
-          Completed
-        </Heading>
-        <TodoList todos={todos} setTodos={setTodos} filterValue={'completed'} />
-      </div>
+            {/* Completed */}
+            <TabPanel>
+              <TodoList todos={todos} setTodos={setTodos} filterValue={'completed'} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
     </main>
   )
 }

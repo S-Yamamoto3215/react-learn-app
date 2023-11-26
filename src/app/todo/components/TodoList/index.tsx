@@ -1,6 +1,9 @@
 import { todoType } from "@/app/todo/types";
 
 import {
+  ButtonGroup,
+  Flex,
+  Spacer,
   Text,
   ListItem,
   UnorderedList,
@@ -21,23 +24,26 @@ export const TodoList = (props: TodoListProps) => {
     <UnorderedList>
       {todos.filter((todo) => todo.status === filterValue).map((todo) => {
         return (
-          <ListItem key={todo.id}>
-            <Text fontSize='xl'>{todo.title}</Text>
-            {(filterValue === 'notStarted' || filterValue === 'completed') &&
-              <MyButton handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
-                In Progress
-              </MyButton>
-            }
-            {filterValue === 'inProgress' &&
-              <>
-                <MyButton handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'notStarted' })}>
-                  Not Started
+          <ListItem key={todo.id} mb={2}>
+            <Flex minWidth='max-content'>
+              <Text fontSize='xl'>{todo.title}</Text>
+              <Spacer />
+              {(filterValue === 'notStarted' || filterValue === 'completed') &&
+                <MyButton size="sm" handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'inProgress' })}>
+                  Do it!
                 </MyButton>
-                <MyButton handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'completed' })}>
-                  Completed
-                </MyButton>
-              </>
-            }
+              }
+              {filterValue === 'inProgress' &&
+                <ButtonGroup gap={2}>
+                  <MyButton size="sm" handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'notStarted' })}>
+                    Stay..
+                  </MyButton>
+                  <MyButton size="sm" handleClick={() => changeTodoStatus({ todo, todos, setTodos, value: 'completed' })}>
+                    Comp!
+                  </MyButton>
+                </ButtonGroup>
+              }
+            </Flex>
           </ListItem>
         )
       })}
